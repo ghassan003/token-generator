@@ -1,9 +1,10 @@
 import express from "express";
 const app = express();
 import cors from "cors";
-const port = 3000;
 import { JWT } from "google-auth-library";
 import { serviceAccount } from "./data.js";
+import { config } from "dotenv";
+config();
 app.use(
 	cors({
 		origin: "*"
@@ -26,6 +27,6 @@ app.get("/", async (req, res) => {
 	res.json(await getAccessToken());
 });
 
-app.listen(port, () => {
-	console.log(`Express is listening at http://localhost:${port}`);
+app.listen(process.env.PORT||3000, () => {
+	console.log(`Express is listening`);
 });
